@@ -8,15 +8,18 @@ public class Main {
         ArrayList<Moto> listaMotos = new ArrayList<>();
         ArrayList<Carro> listaCarros = new ArrayList<>();
 
-        var menuPrincipal = menuPrincipal(sc);
-
         var salir = false;
         do {
+            var menuPrincipal = menuPrincipal(sc);
+            
             switch (menuPrincipal) {
                 case 1:
+                    System.out.println("\n--- MENÚ INGRESAR VEHÍCULOS ---");
                     System.out.println("1. Motocicleta");
                     System.out.println("2. Vehículo");
+                    System.out.print("Digite una opción de la lista: ");
                     var opcion = sc.nextInt();
+                    sc.nextLine();
 
                     switch (opcion) {
                         case 1:
@@ -59,18 +62,21 @@ public class Main {
             }
         } while (!salir);
         System.out.println("Salió del sistema satisfactoriamente");
+        
+        sc.close();
     }
 
     // Menu principal
     public static int menuPrincipal(Scanner sc) {
 
-        System.out.println("--- PROGRAMA PARA LA GESTIÓN DE VEHÍCULOS ---");
+        System.out.println("\n--- PROGRAMA PARA LA GESTIÓN DE VEHÍCULOS ---");
         System.out.println("Digite una de las siguientes opciones: ");
         System.out.println("1. Ingresar vehículo");
         System.out.println("2. Mostrar lista de vehículos");
         System.out.println("3. Mostrar Motocicletas");
         System.out.println("4. Mostrar Carros");
         System.out.println("5. Salir");
+        System.out.print("Digite una opción de la lista: ");
         var opcion = sc.nextInt();
 
         return opcion;

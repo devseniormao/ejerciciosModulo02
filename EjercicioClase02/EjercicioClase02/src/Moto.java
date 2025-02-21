@@ -3,27 +3,27 @@ import java.util.Scanner;
 
 public class Moto extends Vehiculo {
     // Atributos
-    private String tieneSideCar;
+    private String tieneSidecar;
 
     // Constructor
-    public Moto(String tipoVehiculo, String marca, String modelo, int velocidadMaxima, String tieneSideCar) {
+    public Moto(String tipoVehiculo, String marca, String modelo, int velocidadMaxima, String tieneSidecar) {
         super(tipoVehiculo, marca, modelo, velocidadMaxima);
-        this.tieneSideCar = tieneSideCar;
+        this.tieneSidecar = tieneSidecar;
     }
 
     // Getters and Setters
-    public String getTieneSideCar() {
-        return tieneSideCar;
+    public String gettieneSidecar() {
+        return tieneSidecar;
     }
 
-    public void setTieneSideCar(String tieneSideCar) {
-        this.tieneSideCar = tieneSideCar;
+    public void setTieneSidecar(String tieneSidecar) {
+        this.tieneSidecar = tieneSidecar;
     }
 
     public void ingresarMoto(ArrayList<Moto> listaMotos, Scanner sc) {
         var salir = false;
-        var tieneSidecar = "";
         do {
+            System.out.println("\n--- MÓDULO INGRESO DE MOTOCICLETAS ---");
             System.out.print("Ingrese el tipo de vehículo: ");
             var tipoVehiculo = sc.nextLine();
 
@@ -35,41 +35,45 @@ public class Moto extends Vehiculo {
 
             System.out.print("Ingrese la velocidad máxima: ");
             var velocidadMaxVehiculo = sc.nextInt();
+            sc.nextLine();
 
             var salirTieneSidecar = false;
+            String tieneSidecar = "";
             do {
                 System.out.print("Tiene sidecar: ");
                 tieneSidecar = sc.nextLine();
-                if (tieneSidecar.toLowerCase().equals("si") || tieneSidecar.toLowerCase().equals("no")) {
+                if (tieneSidecar.equalsIgnoreCase("si") || tieneSidecar.equalsIgnoreCase("no")) {
                     salirTieneSidecar = true;
                 } else {
                     System.out.println("En este ítem debe ingresar solo (si) o (no)");
                 }
             } while (!salirTieneSidecar);
 
-            Moto moto = new Moto(tipoVehiculo, marcaVehiculo, modeloVehiculo, velocidadMaxVehiculo,
-                    tieneSidecar);
+            Moto moto = new Moto(tipoVehiculo, marcaVehiculo, modeloVehiculo, velocidadMaxVehiculo, tieneSidecar);
             listaMotos.add(moto);
+
+            System.out.print("¿Desea ingresar otra moto? (si/no): ");
+            var respuesta = sc.nextLine();
+            if(respuesta.equalsIgnoreCase("no")){
+                salir = true;
+            }
 
         } while (!salir);
     }
 
     public void mostrarListaMotos(ArrayList<Moto> listaMotos) {
-        String formato = "| %-15s | %-20s | %-10s | %-20d km/h | %-15s |";
-        String formatHeader = "| %-15s | %-20s | %-10s | %-20s km/h | %-15s |";
+        String formato = "| %-15s | %-20s | %-10s | %-20d km/h | %-15s |%n---------------------------------------------------------------------------------------------------------%n";
+        String formatHeader = "---------------------------------------------------------------------------------------------------------%n| %-15s | %-20s | %-10s | %-20s km/h | %-15s |%n---------------------------------------------------------------------------------------------------------%n";
 
-        System.out.println("LISTADO DE MOTOS");
-        System.out.println("---------------------------------------------------");
+        System.out.println("\nLISTADO DE MOTOS");
         System.out.printf(formatHeader, "TIPO VEHÍCULO", "MARCA", "MODELO", "VELOCIDAD MÁXIMA", "TIENE SIDECAR");
-        System.out.println("---------------------------------------------------");
 
         if (listaMotos.isEmpty()) {
             System.out.println("No hay motos en la lista");
         } else {
             for (Moto moto : listaMotos) {
                 System.out.printf(formato, moto.getTipoVehiculo(), moto.getMarca(), moto.getModelo(),
-                        moto.getVelocidadMaxima(), tieneSideCar);
-                System.out.println("---------------------------------------------------");
+                        moto.getVelocidadMaxima(), moto.gettieneSidecar());
             }
         }
     }

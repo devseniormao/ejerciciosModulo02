@@ -37,29 +37,35 @@ public class Carro extends Vehiculo {
             
             System.out.print("Ingrese el número de puertas: ");
             var numeroPuertasVehiculo = sc.nextInt();
+            sc.nextLine();
 
             Carro carro = new Carro(tipoVehiculo, marcaVehiculo, modeloVehiculo, velocidadMaxVehiculo,
                     numeroPuertasVehiculo);
             listaCarros.add(carro);
+
+            System.out.print("Desea ingresar otro carro (si/no): ");
+            var respuesta = sc.nextLine();
+
+            if(respuesta.equalsIgnoreCase("no")){
+                salir = true;
+            }
+
         } while (!salir);
     }
 
     public void mostrarListaCarros(ArrayList<Carro> listaCarros) {
-        String formato = "| %-15s | %-20s | %-10s | %-20d km/h | %-20d |";
-        String formatHeader = "| %-15s | %-20s | %-10s | %-20s km/h | %-20s |";
+        String formato = "| %-15s | %-20s | %-10s | %-20d km/h | %-15s |%n---------------------------------------------------------------------------------------------------------%n";
+        String formatHeader = "---------------------------------------------------------------------------------------------------------%n| %-15s | %-20s | %-10s | %-20s km/h | %-15s |%n---------------------------------------------------------------------------------------------------------%n";
 
-        System.out.println("LISTADO DE VEHÍCULOS");
-        System.out.println("---------------------------------------------------");
+        System.out.println("\nLISTADO DE CARROS");
         System.out.printf(formatHeader, "TIPO VEHÍCULO", "MARCA", "MODELO", "VELOCIDAD MÁXIMA", "NUMERO DE PUERTAS");
-        System.out.println("---------------------------------------------------");
 
         if (listaCarros.isEmpty()) {
             System.out.println("No hay vehículos en la lista");
         } else {
             for (Carro carro : listaCarros) {
                 System.out.printf(formato, carro.getTipoVehiculo(), carro.getMarca(), carro.getModelo(),
-                        carro.getVelocidadMaxima(), numPuertas);
-                System.out.println("---------------------------------------------------");
+                        carro.getVelocidadMaxima(), carro.getNumPuertas());
             }
         }
     }
